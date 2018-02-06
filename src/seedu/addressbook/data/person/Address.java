@@ -8,11 +8,14 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
-    public static final String ADDRESS_VALIDATION_REGEX = ".+";
-
+    public static final String EXAMPLE = "123, some street, #12-123, 123456";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person address must in this form: BLOCK, STREET, UNIT, POSTAL_CODE";
+    public static final String ADDRESS_VALIDATION_REGEX = ".+,.+,.+,.+,";
     public final String value;
+    public final Block block;
+    public final Street street;
+    public final Unit unit;
+    public final PostalCode postalCode;
     private boolean isPrivate;
 
     /**
@@ -27,6 +30,12 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
+        String[] separatedAddress = trimmedAddress.split(",");
+        this.block = new Block(separatedAddress[0].trim());
+        this.street = new Street(separatedAddress[1].trim());
+        this.unit = new Unit(separatedAddress[2].trim());
+        this.postalCode = new PostalCode(separatedAddress[3].trim());
+
     }
 
     /**
@@ -38,19 +47,23 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        return String.format("%s, %s, %s, %s",
+                block.toString(),
+                street.toString(),
+                unit.toString(),
+                postalCode.toString());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.toString().equals(((Address) other).toString())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.toString().hashCode();
     }
 
     public boolean isPrivate() {
