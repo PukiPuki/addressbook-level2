@@ -12,6 +12,8 @@ public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
 
+    public static final String MESSAGE_NO_LAST = "There is no last successful command executed, please use another command.";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Redo last successful command.\n"
             + "Example: " + COMMAND_WORD;

@@ -112,7 +112,7 @@ public class Parser {
      */
     private Command prepareRedo() {
        if (lastCommand == null) {
-           return new IncorrectCommand("There is no last successful command executed, please use another command.");
+           return new IncorrectCommand(RedoCommand.MESSAGE_NO_LAST);
        } else {
            return lastCommand;
        }

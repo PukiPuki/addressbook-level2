@@ -12,17 +12,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.addressbook.commands.AddCommand;
-import seedu.addressbook.commands.ClearCommand;
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.DeleteCommand;
-import seedu.addressbook.commands.ExitCommand;
-import seedu.addressbook.commands.FindCommand;
-import seedu.addressbook.commands.HelpCommand;
-import seedu.addressbook.commands.IncorrectCommand;
-import seedu.addressbook.commands.ListCommand;
-import seedu.addressbook.commands.ViewAllCommand;
-import seedu.addressbook.commands.ViewCommand;
+import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
@@ -39,13 +29,14 @@ public class ParserTest {
 
     @Before
     public void setUp() {
-        parser = new Parser();
+        parser = new Parser(null);
     }
 
     /*
      * Note how the names of the test methods does not follow the normal naming convention.
      * That is because our coding standard allows a different naming convention for test methods.
      */
+
 
     @Test
     public void parse_emptyInput_returnsIncorrect() {
@@ -63,6 +54,12 @@ public class ParserTest {
     /*
      * Tests for 0-argument commands =======================================================================
      */
+
+    @Test
+    public void parse_redoCommand_noLastCommand() {
+        final String input = "redo";
+        parseAndAssertIncorrectWithMessage(RedoCommand.MESSAGE_NO_LAST, input);
+    }
 
     @Test
     public void parse_helpCommand_parsedCorrectly() {
