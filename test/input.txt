@@ -1,4 +1,27 @@
 ##########################################################
+# redo command
+##########################################################
+
+  # should recognise this is the first command
+  redo
+
+  # should have repeated list
+	list
+	redo
+
+	# should have repeated view
+  view 1
+	redo
+
+	# should have repeated help
+	help
+	redo
+
+	# should have repeated help when invalid command
+  sfdfd
+	redo
+
+##########################################################
 # invalid command
 ##########################################################
 
@@ -32,7 +55,7 @@
   add Valid Name p/12345 valid@email.butNoPrefix a/valid, address
   add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address
   add Valid Name p/12345 e/valid@email.butNoTagPrefix a/valid, address t/goodTag noPrefixTag
-  
+
   # should catch invalid person data
   add []\[;] p/12345 e/valid@e.mail a/valid, address
   add Valid Name p/not_numbers e/valid@e.mail a/valid, address
