@@ -117,7 +117,11 @@ Format: `clear`
 
 #### Exiting the program : `exit`
 Exits the program.<br>
-Format: `exit`  
+Format: `exit`
+
+### Redo last successful command : `redo`
+Redo last successful command if available.<br>
+Format: `redo`
 
 #### Saving the data 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>

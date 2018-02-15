@@ -13,6 +13,6 @@ public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "Redo last successful command \n"
+            + ": Redo last successful command.\n"
             + "Example: " + COMMAND_WORD;
 }

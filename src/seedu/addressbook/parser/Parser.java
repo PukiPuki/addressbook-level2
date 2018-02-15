@@ -72,9 +72,6 @@ public class Parser {
 
         switch (commandWord) {
 
-        case RedoCommand.COMMAND_WORD:
-            return prepareRedo();
-
         case AddCommand.COMMAND_WORD:
             return prepareAdd(arguments);
 
@@ -98,6 +95,10 @@ public class Parser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return prepareRedo();
+
 
         case HelpCommand.COMMAND_WORD: // Fallthrough
         default:
