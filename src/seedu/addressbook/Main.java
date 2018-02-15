@@ -81,9 +81,11 @@ public class Main {
     /** Reads the user command and executes it, until the user issues the exit command.  */
     private void runCommandLoopUntilExitCommand() {
         Command command;
+        Command lastCommand = null;
         do {
             String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
+            command = new Parser(lastCommand).parseCommand(userCommandText);
+            lastCommand = command;
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);

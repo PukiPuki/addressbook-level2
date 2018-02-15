@@ -11,17 +11,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.addressbook.commands.AddCommand;
-import seedu.addressbook.commands.ClearCommand;
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.DeleteCommand;
-import seedu.addressbook.commands.ExitCommand;
-import seedu.addressbook.commands.FindCommand;
-import seedu.addressbook.commands.HelpCommand;
-import seedu.addressbook.commands.IncorrectCommand;
-import seedu.addressbook.commands.ListCommand;
-import seedu.addressbook.commands.ViewAllCommand;
-import seedu.addressbook.commands.ViewCommand;
+import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
@@ -56,7 +46,14 @@ public class Parser {
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    public Parser() {}
+    /**
+     * Used to hold the last successful command
+     */
+    private Command lastCommand;
+
+    public Parser(Command lastCommand) {
+        this.lastCommand = lastCommand;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -74,6 +71,9 @@ public class Parser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
+
+        case RedoCommand.COMMAND_WORD:
+            return prepareRedo();
 
         case AddCommand.COMMAND_WORD:
             return prepareAdd(arguments);
@@ -103,6 +103,18 @@ public class Parser {
         default:
             return new HelpCommand();
         }
+    }
+
+    /**
+     * Redo the last successful command
+     * @return the last successful command
+     */
+    private Command prepareRedo() {
+       if (lastCommand == null) {
+           return new IncorrectCommand("There is no last successful command executed, please use another command.");
+       } else {
+           return lastCommand;
+       }
     }
 
     /**
